@@ -10,10 +10,9 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window = SDL_CreateWindow("SDL pixels", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
     SDL_Surface* screen = SDL_GetWindowSurface(window);
-    SDL_Surface* pixels = SDL_CreateRGBSurfaceWithFormat(0, width, height,32, SDL_PIXELFORMAT_RGBX8888);
+    SDL_Surface* pixels = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBX8888);
 
     unsigned int t1 = SDL_GetTicks();
-
     float pos = 0;
 
     for (;;)

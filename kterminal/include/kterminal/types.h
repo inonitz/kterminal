@@ -8,15 +8,20 @@ typedef uint32_t* framebufferAddress_t;
 #endif /* __FRAMEBUFFER_ADDRESS_TYPE_DEFINITION__ */
 
 #ifndef __FRAMEBUFFER_RESOLUTION_TYPE_DEFINITION__
-typedef struct generic_framebuffer_resolution {
-    uint16_t width;
-    uint16_t height;
-} framebufferPixelResolution_t;
+#   define __FRAMEBUFFER_RESOLUTION_TYPE_DEFINITION__
 #endif /* __FRAMEBUFFER_RESOLUTION_TYPE_DEFINITION__ */
 
 
-typedef struct terminalInstance* terminalHandle_t;
-typedef struct fontStyle_t*      terminalFontStyleHandle_t;
+#ifdef __FRAMEBUFFER_RESOLUTION_TYPE_DEFINITION__
+typedef struct generic_vector_2_shorts_type {
+    uint16_t m_width;
+    uint16_t m_height;
+} pixelOffset_t;
+typedef pixelOffset_t framebufferPixelResolution_t;
+#endif /* __FRAMEBUFFER_RESOLUTION_TYPE_DEFINITION__ */
 
+typedef struct terminalInstance*     terminalHandle_t;
+typedef struct fontStyle_t*          terminalFontStyleHandle_t;
+typedef struct bitmapFontRenderer_t* bitmapFontRendererHandle_t;
 
 #endif /* __KERNEL_TERMINAL_PRIMITIVE_TYPES_DEFINTION__ */

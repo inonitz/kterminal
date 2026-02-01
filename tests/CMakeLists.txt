@@ -13,15 +13,18 @@ set(SOURCES
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
-
+target_link_libraries(
+    ${PROJECT_NAME} PRIVATE
+    SDL2::SDL2
+    SDL2::SDL2main
+)
 
 # The minimum C/C++ versions required for the library
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 target_compile_features(${PROJECT_NAME} PUBLIC c_std_11)
 
 
-add_custom_target(run_binary
+add_custom_target(run_tests
     COMMAND ./${PROJECT_NAME}
     DEPENDS ${PROJECT_NAME}
     WORKING_DIRECTORY ${CMAKE_CUSTOM_BUILD_OUTPUT_DIRECTORY}

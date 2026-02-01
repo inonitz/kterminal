@@ -1,24 +1,3 @@
-param(
-    [Parameter(Mandatory=$true)]
-    [ValidateSet("debug","debug_perf","release","release_dbginfo","release_perf")]
-    [string]$BuildType,
-
-    [Parameter(Mandatory=$true)]
-    [ValidateSet("shared","static")]
-    [string]$LinkType,
-
-    [Parameter(Mandatory=$true)]
-    [ValidateSet("run","cleanbuild","build")]
-    [string]$Action,
-
-    [switch]$DryRun,
-
-    [switch]$Help
-)
-
-$ErrorActionPreference = "Stop"
-
-
 # From: https://stackoverflow.com/a/12605755
 function Force-Resolve-Path {
     <#
@@ -60,10 +39,31 @@ function Show-Help {
 }
 
 
-if ($Help) {
+if ($args -match '^(--help|-help|/help|/\?)$') {
     Show-Help
-    return
+    exit
 }
+
+
+param(
+    [Parameter(Mandatory=$true)]
+    [ValidateSet("debug","debug_perf","release","release_dbginfo","release_perf")]
+    [string]$BuildType,
+
+    [Parameter(Mandatory=$true)]
+    [ValidateSet("shared","static")]
+    [string]$LinkType,
+
+    [Parameter(Mandatory=$true)]
+    [ValidateSet("run","cleanbuild","build")]
+    [string]$Action,
+
+    [Parameter(Mandatory=$false)]
+    [switch]$DryRun
+)
+
+
+$ErrorActionPreference = "Stop"
 
 
 
@@ -198,7 +198,9 @@ if ($CLEAN_CURRENT_ROOT_BUILD_DIR -and (Test-Path $CMAKE_FINAL_BUILD_DIR)) {
 if ($BUILD_BINARIES_FLAG) {
     $cmakeCmd = "cmake -S . -B '$CMAKE_FINAL_BUILD_DIR' -G 'Ninja'"
     $cmakeCmd = -join($cmakeCmd, " ", $CMAKE_ARGLIST)
-    
+
+    # $cmakeCmd = $cmakeCmd + " " + ($CMAKE_ARGLIST -join " ")
+
     $mkdir_p_option_equiv = {
         # New-Item -ItemType Directory -Path $CMAKE_FINAL_BUILD_DIR -Force | Out-Null 
         New-Item -ItemType Directory -Path $CMAKE_FINAL_BUILD_DIR -Force
