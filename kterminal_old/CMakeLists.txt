@@ -7,12 +7,14 @@ project(kterminal
 
 
 set(SOURCES
-    source/internal/
-    source/fonts/Consolas12_bmp.c
+    source/kterm.c
 )
 
 set(HEADERS
-    include/kterminal/fonts/Consolas12_bmp.h
+    include/kterminal/kterm_api.h
+    include/kterminal/kterm_extern.h 
+    include/kterminal/kterm.h
+    include/kterminal/types.h
 )
 
 
@@ -28,7 +30,7 @@ add_library(kterminal::kterminal ALIAS ${PROJECT_NAME})
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 target_sources(${PROJECT_NAME} PRIVATE ${HEADERS})
-# target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
 
 
 # The minimum C/C++ versions required for the library

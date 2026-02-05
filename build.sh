@@ -6,7 +6,8 @@ CMAKE_ARGLIST="\
     -DCMAKE_C_COMPILER=clang-20 \
     -DCMAKE_CXX_COMPILER=clang++-20 \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-    -DCMAKE_COLOR_DIAGNOSTICS=ON
+    -DCMAKE_COLOR_DIAGNOSTICS=ON \
+    -DENABLE_AND_BUILD_TESTS=ON
 "
 
 CMAKE_ORIGINAL_SCRIPT_PATH="$PWD" # Assuming that build.sh is in the same dir as the Root CMakeLists.txt
@@ -167,7 +168,7 @@ fi
 if [ $RUN_BINARY_FLAG = "true" ];
 then
     cd $CMAKE_FINAL_BUILD_DIR # This assumes we already built
-    ninja run_binary
+    ninja run_TestingKTerminal
 fi
 
 

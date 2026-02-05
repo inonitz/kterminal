@@ -92,10 +92,32 @@ OPTION(MEASURE_PERFORMANCE_TIMEOUT
     ON
 )
 
+OPTION(ENABLE_AND_BUILD_TESTS
+    "Create Build, Run Targets for Testing of kterminal"
+)
+
 
 add_subdirectory(kterminal)
-add_subdirectory(tests)
+# Thank you to:
+# https://github.com/cld-gh/cpp-with-gtest-example
+# https://stackoverflow.com/questions/50468620/what-does-enable-testing-do-in-cmake
+if(${ENABLE_AND_BUILD_TESTS})
+    enable_testing()
+    add_subdirectory(tests)
+    add_subdirectory(dependencies/googletest)
+endif()
+
+
+# Disable everything except Video and Events
+set(SDL_AUDIO      OFF CACHE BOOL "" FORCE)
+set(SDL_JOYSTICK   OFF CACHE BOOL "" FORCE)
+set(SDL_HAPTIC     OFF CACHE BOOL "" FORCE)
+set(SDL_SENSOR     OFF CACHE BOOL "" FORCE)
+set(SDL_HIDAPI     OFF CACHE BOOL "" FORCE)
+set(SDL_VIDEO      ON  CACHE BOOL "" FORCE)
+set(SDL_EVENTS     ON  CACHE BOOL "" FORCE)
 add_subdirectory(dependencies/SDL2)
+
 # add_subdirectory(dependencies/SDL)
 # add_subdirectory(dependencies/SDL_shadercross)
 # add_subdirectory(dependencies/shaderc)
