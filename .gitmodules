@@ -8,3 +8,6 @@
 	url = https://github.com/libsdl-org/SDL
 	branch = SDL2
 
+[submodule "dependencies/googletest"]
+	path = dependencies/googletest
+	url = https://github.com/google/googletest.git
