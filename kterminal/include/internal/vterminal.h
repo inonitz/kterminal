@@ -28,7 +28,7 @@ void initializeTerminalEmulator(
     terminalEmulator_t*  toCreate,
     rowSpan_t*           preAllocatedSpanBufferDependingOnFramebufferResolution,
     LoggingRingBuffer_t* preAllocatedLoggingBuffer,
-    framebuffer_t        framebufferDescription
+    framebuffer_t*       framebufferDescription
 );
 
 

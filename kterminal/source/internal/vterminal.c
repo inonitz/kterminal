@@ -11,7 +11,7 @@ void initializeTerminalEmulator(
     terminalEmulator_t*  toCreate,
     rowSpan_t*           preAllocatedSpanBufferDependingOnFramebufferResolution,
     LoggingRingBuffer_t* preAllocatedLoggingBuffer,
-    framebuffer_t        framebufferDescription
+    framebuffer_t*       framebufferDescription
 ) {
     *toCreate = (terminalEmulator_t){
         (position2D_t){0, 0},

@@ -3,6 +3,11 @@
 #include <stdint.h>
 
 
+typedef struct generic_24_bit_rgb_colour_format {
+    uint8_t rgb[3];
+} rgb24;
+
+
 typedef struct generic_position_16bit_type_definition {
     uint16_t x;
     uint16_t y;
@@ -25,13 +30,34 @@ typedef struct __uefi_framebuffer_pixel_format_type {
 } pixelMetadata_t;
 
 
+typedef union {
+    uint64_t raw;
+    uint32_t u32;
+    uint16_t u16;
+    uint8_t  bytes[8];
+} genericHardwareColour_t;
+
+
+typedef position2D_t (*charBlitterFunc)(
+    position2D_t         		pos,
+    struct fontStyle_t   const* font,
+    struct framebuffer_t const* canvas,
+    genericHardwareColour_t 	fg,
+    genericHardwareColour_t 	bg,
+    char                    	character
+);
+
+
 typedef struct generic_framebuffer_type_definition {
-	void*           	   m_baseAddress;
-    position2D_t    	   m_size;
-	uint16_t        	   m_pixelsPerScanLine;
-	pixelMetadata_t 	   m_pixelInfo;
-	charBlitterTypeGeneric
+	void*           m_baseAddress;
+    position2D_t    m_size;
+	uint16_t        m_pixelsPerScanLine;
+    uint8_t         m_reserved[2];
+	pixelMetadata_t m_pixelInfo;
+	charBlitterFunc m_drawChar;
 } framebuffer_t;
+
+
 
 
 #endif /* __KERNEL_TERMINAL_EMULATOR_COMMON_TYPES_DEFINITION__ */
