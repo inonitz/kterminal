@@ -2,17 +2,22 @@ cmake_minimum_required(VERSION 3.14)
 project(kterminal 
     VERSION 0.0.1
     DESCRIPTION "Kernel-Space Terminal Emulator"
-    LANGUAGES C
+    LANGUAGES C CXX
 )
 
 
 set(SOURCES
-    source/internal/
-    source/fonts/Consolas12_bmp.c
+    source/fonts/fontstyle.c
+    source/internal/fontrender.c
+    source/internal/vterminal.c
 )
 
 set(HEADERS
-    include/kterminal/fonts/Consolas12_bmp.h
+    include/kterminal/fonts/fontstyle.h
+    include/internal/fontrender.h
+    include/internal/ringbuffer.h
+    include/internal/types.h
+    include/internal/vterminal.h
 )
 
 
@@ -28,7 +33,7 @@ add_library(kterminal::kterminal ALIAS ${PROJECT_NAME})
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 target_sources(${PROJECT_NAME} PRIVATE ${HEADERS})
-# target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
+target_link_libraries(${PROJECT_NAME} PRIVATE UTIL2::util2)
 
 
 # The minimum C/C++ versions required for the library

@@ -19,8 +19,8 @@ typedef struct output_only_terminal_emulator_type_definition {
     rowSpan_t*          m_rowBuf; /* array of spans, each of which index into m_log in respective offsets */
 
 
-    LoggingRingBuffer_t    m_log;
-    framebuffer_t          m_drawBuffer;
+    LoggingRingBuffer_t m_log;
+    framebuffer_t       m_drawBuffer;
 } terminalEmulator_t;
 
 

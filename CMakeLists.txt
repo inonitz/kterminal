@@ -117,6 +117,7 @@ set(SDL_HIDAPI     OFF CACHE BOOL "" FORCE)
 set(SDL_VIDEO      ON  CACHE BOOL "" FORCE)
 set(SDL_EVENTS     ON  CACHE BOOL "" FORCE)
 add_subdirectory(dependencies/SDL2)
+add_subdirectory(dependencies/util2)
 
 # add_subdirectory(dependencies/SDL)
 # add_subdirectory(dependencies/SDL_shadercross)
