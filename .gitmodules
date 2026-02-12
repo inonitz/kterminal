@@ -11,3 +11,8 @@
 [submodule "dependencies/googletest"]
 	path = dependencies/googletest
 	url = https://github.com/google/googletest.git
+
+
+[submodule "dependencies/util2"]
+	path = dependencies/util2
+	url = https://github.com/inonitz/util2.git
